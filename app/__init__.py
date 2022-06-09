@@ -20,9 +20,6 @@ def time_to(deadline, diff):
     # Add the difference of dateTime between server and user
     delta += diff
 
-    print("*&"*15)
-    print(delta)
-
     delta_minute = int(delta / 60)
     delta_hour = int(delta / (60 * 60))
     delta_day = int(delta / (60 * 60 * 24))

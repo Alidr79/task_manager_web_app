@@ -23,10 +23,6 @@ def index():
     result = connection.execute("SELECT diff FROM user WHERE user_id = ?",
                        [user_id]).fetchone()
     connection.close()
-    print("@"*10)
-    print(type(result['diff']))
-    print("$"*10)
-    print(result['diff'])
     if result is not None:
         return render_template('index.html', task_list=task_list, diff=result['diff'])
     else:

@@ -1,5 +1,4 @@
 # Task manager web application
-# 🚧Under development🚧
 Using **Python + Flask + BootStrap**<br> 
 **I have learned a little bit about BootStrap, so this app has a good (at least for me) UI**<br>
 

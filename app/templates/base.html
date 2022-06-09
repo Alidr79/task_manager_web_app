@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="static/favicon.png" type="image/icon type">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body class="bg-dark">
+    <div class="container">
+      <div class="mt-1 d-flex bg-warning rounded justify-content-center shadow-lg">
+        {% block menu_item %}
+        {% endblock %}
+      </div>
+      <br>
+      {% with messages = get_flashed_messages() %}
+        {% if messages[-1] %}
+            <div class="row w-50" style="margin: auto;width: 30%;">
+              <div class="alert alert-secondary dismissible fade show">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{ messages[-1] }}
+              </div>
+            </div>
+        {% endif %}
+      {% endwith %}
+      <br>
+      {% block main %}{% endblock %}
+      <footer class="text-lg-start fixed-bottom" style="background-color: rgba(0, 0, 0, 0.418);">
+        <!-- Copyright -->
+        <div class="p-3 text-secondary">
+          Made with ❤️ by 
+          <a class="text-light" target="_blank" style="text-decoration: none;" href="https://github.com/alidr79">A-Derakhshesh</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+    </div>
+
+    
+  </body>
+</html>
+
+

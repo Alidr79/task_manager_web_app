@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Board{% endblock %}
+{% block menu_item %}
+<a href="{{ url_for('main.add_task') }}" class="nav-link text-dark" style="font-size: 1.5rem;font-weight: bold;">Add task</a>
+<a href="{{ url_for('main.logout') }}" class="nav-link text-dark" style="font-size: 1.5rem;font-weight: bold;">Logout</a>
+{% endblock %}
+
+
+{% block main %}
+<div class="d-flex flex-wrap rounded p-2">
+  {% if not task_list[0] %}
+  <h1 class="text-light">There is nothing to do</h1>
+
+  {% else %}
+    {% for task in task_list %}
+      <div class="card flex-fill me-1 ms-1 mb-2 bg-dark shadow-lg">
+        <div class="card-body">
+          {% if task['task_color']==0 %}
+            <h3 class="card-title text-warning">&{{ task['task_emoji'] }};{{ task['task_name'] }}</h3>
+          {% endif %}
+          {% if task['task_color']==1 %}
+            <h3 class="card-title text-danger">&{{ task['task_emoji'] }};{{ task['task_name'] }}</h3>
+          {% endif %}
+          {% if task['task_color']==2 %}
+            <h3 class="card-title text-primary">&{{ task['task_emoji'] }};{{ task['task_name'] }}</h3>
+          {% endif %}
+          {% if task['task_color']==3 %}
+            <h3 class="card-title text-success">&{{ task['task_emoji'] }};{{ task['task_name'] }}</h3>
+          {% endif %}
+          {% if task['task_color']==4 %}
+            <h3 class="card-title text-light">&{{ task['task_emoji'] }};{{ task['task_name'] }}</h3>
+          {% endif %}
+          
+          
+          <p class="card-text text-secondary">{{ task['task_desc'] }}</p>
+          <a href="{{ url_for('main.delete', task_id = task['task_id']) }}" class="btn btn-outline-warning">Done</a>
+        </div>
+        <div class="card-footer text-muted">
+          {% if task['deadline_isactive'] == 1 %}
+            {{ time_to(task['task_deadline'], diff) }}
+          {% elif task['deadline_isactive'] == 0 %}
+            Just do it
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+
+</div>
+<br>
+<br>
+
+
+{% endblock %}

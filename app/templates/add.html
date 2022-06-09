@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Add task{% endblock %}
+{% block menu_item %}
+<a href="{{ url_for('main.index') }}" class="nav-link text-dark" style="font-size: 1.5rem;font-weight: bold;">Board</a>
+<a href="{{ url_for('main.logout') }}" class="nav-link text-dark" style="font-size: 1.5rem;font-weight: bold;">Logout</a>
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex bg-dark col-9 text-warning justify-content-center shadow-lg" style="border-style: inset;border-radius: 40px;
+      padding: 12px;border: 0px;">
+        <form method="post" class="col-11">
+    
+          <div class="mb-3">
+            <label for="task_name" class="form-label">Task name</label>
+            <input type="text" class="form-control" name="task_name" id="task_name"
+            placeholder="Writing the assignment" aria-describedby="name_help"
+            maxlength="25" title="maximum length is 25" required>
+            <div class="form-text mx-2 text-secondary" id="name_help">Using a proper name is always good</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="task_desc" class="form-label">Task description</label>
+            <input type="text" class="form-control" name="task_desc" id="task_desc"
+            placeholder="I should mail it ASAP" aria-describedby="desc_help"
+            maxlength="50" title="maximum length is 50" required>
+            <div class="form-text mx-2 text-secondary" id="desc_help">You can add a description here</div>
+          </div>
+
+          <div class="mb-3">
+              <label for="deadline_active" class="form-label">Use a deadline ?</label>
+              <br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="deadline_isactive" id="deadline_active" value="on"
+                onchange="isActive(this.value);">
+                <label class="form-check-label text-secondary" for="deadline_active">Yes</label>
+              </div>
+            
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="deadline_isactive" id="deadline_inactive" value="off"
+                onchange="isActive(this.value);" checked>
+                <label class="form-check-label text-secondary" for="deadline_inactive">No</label>
+              </div>
+            <div id="gp_deadline" class="mt-1" hidden>
+              <input type="datetime-local" class="w-75 rounded p-1 mt-1 shadow-lg bg-dark bg-gradient text-secondary"
+              id="task_deadline" name="task_deadline" aria-describedby="deadline_help">
+              <div class="form-text mx-2 text-secondary" id="deadline_help">You can add a deadline here</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="task_emoji">Task emoji</label>
+            <select class="form-select mt-2" name="task_emoji" id="task_emoji" aria-describedby="emoji-help">
+              {% for emoji_pure in emojis_pure%}
+              <option value="{{emoji_pure}}">&{{emoji_pure}};</option>
+              {% endfor %}
+            </select>
+            <div class="form-text mx-2 text-secondary" id="emoji_help">Customize it with an emoji</div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="col">
+              <label for="color_range" class="form-label">Task color</label>
+              <label class="form-text mx-2 text-secondary">Use colors for having a better sense about task</label>
+            </div>
+            <input class="form-range" type="range" id="color_range" name="task_color" min="0" value="0" max="4" onchange="updateColor(this.value);">
+            <div class="mx-2">
+              <h1 class="text-secondary text-center"><span id="color_label" class="text-warning">Task color</span></h1>
+            </div>
+        
+            <script>
+              function updateColor(val) {
+                if(val == 0){
+                  document.getElementById('color_label').className="text-warning"; 
+                }
+                else if(val == 1){
+                  document.getElementById('color_label').className="text-danger"; 
+                }
+                else if(val == 2){
+                  document.getElementById('color_label').className="text-primary"; 
+                }
+                else if(val == 3){
+                  document.getElementById('color_label').className="text-success"; 
+                }
+                else if(val == 4){
+                  document.getElementById('color_label').className="text-light"; 
+                }
+              };
+
+              function isActive(val){
+                if(val == 'on'){
+                  document.getElementById('gp_deadline').removeAttribute("hidden");
+                  document.getElementById('task_deadline').setAttribute("required", true)
+                }
+                else if(val == 'off'){
+                  document.getElementById('gp_deadline').setAttribute("hidden", true);
+                  document.getElementById('task_deadline').removeAttribute("required");
+                }
+              };
+              </script>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning col-6" style="font-size:large;font-weight: bold;">Add !</button>
+          </div>      
+      
+        </form>
+    </div>
+  </div>
+</div>
+<br><br><br><br>
+{% endblock %}

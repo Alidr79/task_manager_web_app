@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+{% block menu_item %}
+<a href="{{ url_for('main.index') }}" class="nav-link text-dark" style="font-size: 1.5rem;font-weight: bold;">Board</a>
+<a href="{{ url_for('main.signup') }}" class="nav-link text-dark" style="font-size: 1.5rem;font-weight: bold;">Signup</a>
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex bg-dark col-9 text-warning justify-content-center shadow-lg" style="border-style: inset;border-radius: 40px;
+      padding: 12px;border: 0px;">
+        <form method="post" class="col-11">
+    
+          <div class="mb-3">
+            <label for="ticket_number" class="form-label">Ticket number</label>
+            <input type="number" class="form-control" name="ticket_number" id="ticket_number"
+            placeholder="Ticket number" aria-describedby="name_help"
+            maxlength="4" title="maximum length is 4" required>
+            <div class="form-text mx-2 text-secondary" id="name_help">Please enter your ticket number</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="current_dateTime" class="form-label">Current date and time</label><br>
+            <input type="datetime-local" class="w-75 rounded p-1 mt-1 shadow-lg bg-dark bg-gradient text-secondary"
+            id="current_dateTime" name="current_dateTime" aria-describedby="current_dateTime_help" required>
+            <div class="form-text mx-2 text-secondary" id="current_dateTime_help">Please enter your current dateTime</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="user_password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="user_password" id="user_password"
+            placeholder="********" aria-describedby="desc_help"
+            maxlength="16" minlength="8" title="maximum length is 16 and minimum length is 8" required>
+            <div class="mt-2">
+                <input type="checkbox" name="showOrHide" id="cb_showHide" class="form-check-input" onchange="show_hide();">
+                <label for="cb_showHide" class="form-check-label ms-1">Show/hide</label>
+            </div>          
+          </div>
+
+          <script>
+            function show_hide() {
+              var x = document.getElementById("user_password");
+              if (x.type == "password") {
+                x.type = "text";
+              } else {
+                  x.type = "password";
+                  }
+              }
+          </script>
+
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning col-6" style="font-size:large;font-weight: bold;">Login</button>
+          </div>      
+      
+        </form>
+    </div>
+  </div>
+</div>
+<br><br><br><br>
+{% endblock %}

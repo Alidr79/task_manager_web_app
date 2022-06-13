@@ -9,6 +9,7 @@ digits = "1234567890"
 alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 invite_list = set() # to check repeated items
 
+# oops i cant share the seed, but if you want an invite ticket send me an email.
 # # *This part is private*
 # SEED = ""
 # random.seed(SEED)

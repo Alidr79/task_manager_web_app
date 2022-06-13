@@ -34,6 +34,12 @@ def login():
     if request.method == "POST":
         ticket_number = request.form.get('ticket_number')
         user_password = request.form.get('user_password')
+        # The following part is really important, But why?
+        # The server current time and the user current time maybe different from each other
+        # Because they may exist in different time zones
+        # So Here we are getting the user current time and calculating the difference between user current time and 
+        # server current time.
+        # each time we are calculating the remaining time to a deadline we should add this difference...:)
         user_dateTime = request.form.get('current_dateTime')
         user_dateTime = user_dateTime.replace('T', ' ') + ':00'
 
